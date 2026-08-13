@@ -1,0 +1,14 @@
+# 同步状态（运行时生成，含时间戳/md5）
+sync-state/
+
+# 临时诊断脚本
+diag-remote.py
+
+# 合并后的 session 数据（运行时产物，体积大）
+codex-merged-session.jsonl
+
+# macOS
+.DS_Store
+
+# 日志
+*.log
