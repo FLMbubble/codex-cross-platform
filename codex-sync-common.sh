@@ -4,8 +4,6 @@
 
 # 远程主机
 REMOTE_HOST="${CODEX_SYNC_REMOTE:-172.29.102.24}"
-# 远程 codex 数据目录
-REMOTE_CODEX_HOME="${REMOTE_CODEX_HOME:-\$HOME/.codex}"
 
 # 发现本地所有会话 rollout 文件
 # 输出格式: <session_id> <relative_path>  每行一个，按修改时间倒序

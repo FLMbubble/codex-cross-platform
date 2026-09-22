@@ -57,15 +57,15 @@ local_md5() {
 }
 
 remote_md5() {
-    ssh -o BatchMode=yes -o ConnectTimeout=5 "$REMOTE_HOST_HOST" \
-        "if [ -f ~/$REMOTE_HOST_FILE ]; then md5sum ~/$REMOTE_HOST_FILE | cut -d' ' -f1; else echo MISSING; fi" 2>/dev/null
+    ssh -o BatchMode=yes -o ConnectTimeout=5 "$REMOTE_HOST" \
+        "if [ -f ~/$REMOTE_FILE ]; then md5sum ~/$REMOTE_FILE | cut -d' ' -f1; else echo MISSING; fi" 2>/dev/null
 }
 
 show_status() {
     local sz
     sz=$(wc -c < "$LOCAL_FILE" 2>/dev/null || echo 0)
     local rsz
-    rsz=$(ssh -o BatchMode=yes -o ConnectTimeout=5 "$REMOTE_HOST_HOST" "wc -c < ~/$REMOTE_HOST_FILE" 2>/dev/null || echo 0)
+    rsz=$(ssh -o BatchMode=yes -o ConnectTimeout=5 "$REMOTE_HOST" "wc -c < ~/$REMOTE_FILE" 2>/dev/null || echo 0)
     local L R
     L=$(local_md5)
     R=$(remote_md5)
@@ -81,14 +81,14 @@ show_status() {
 
 # 在远程注册/更新 thread（确保 codex resume 可见）
 register_remote_thread() {
-    scp -q -o BatchMode=yes "$REGISTER_SCRIPT" "$REMOTE_HOST_HOST:~/.codex/codex-thread-register.py" 2>/dev/null
-    ssh -o BatchMode=yes "$REMOTE_HOST_HOST" \
-        "python3 ~/.codex/codex-thread-register.py ~/$REMOTE_HOST_FILE ~/.codex/state_5.sqlite" 2>/dev/null
+    scp -q -o BatchMode=yes "$REGISTER_SCRIPT" "$REMOTE_HOST:~/.codex/codex-thread-register.py" 2>/dev/null
+    ssh -o BatchMode=yes "$REMOTE_HOST" \
+        "python3 ~/.codex/codex-thread-register.py ~/$REMOTE_FILE ~/.codex/state_5.sqlite" 2>/dev/null
 }
 
 do_push() {
     ensure_remote_dir "$SESSION_REL"
-    scp -q -o BatchMode=yes "$LOCAL_FILE" "$REMOTE_HOST_HOST:~/$REMOTE_HOST_FILE"
+    scp -q -o BatchMode=yes "$LOCAL_FILE" "$REMOTE_HOST:~/$REMOTE_FILE"
     echo "  ✓ file pushed"
     register_remote_thread
     echo "✓ Push complete:"
@@ -96,7 +96,7 @@ do_push() {
 }
 
 do_pull() {
-    scp -q -o BatchMode=yes "$REMOTE_HOST_HOST:~/$REMOTE_HOST_FILE" "$TMP_PULL"
+    scp -q -o BatchMode=yes "$REMOTE_HOST:~/$REMOTE_FILE" "$TMP_PULL"
     echo "  ✓ pulled to $TMP_PULL"
     echo ""
     echo "在本地终端运行："

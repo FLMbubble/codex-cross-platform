@@ -171,7 +171,7 @@ uninstall_launchd() {
 show_status() {
     echo "=== Codex Session 同步守护（多会话）==="
     if launchctl list "$PLIST_LABEL" &>/dev/null; then
-        pid=$(launchctl list "$PLIST_LABEL" 2>/dev/null | grep -oP '"PID" = \K\d+' || echo "?")
+        pid=$(launchctl list "$PLIST_LABEL" 2>/dev/null | grep "PID" | sed "s/.*= //;s/;//" || echo "?")
         echo "  服务状态: 运行中 (PID: ${pid:-?})"
     else
         echo "  服务状态: 未安装/未运行"

@@ -12,3 +12,6 @@ codex-merged-session.jsonl
 
 # 日志
 *.log
+
+#配置文件
+*.conf
