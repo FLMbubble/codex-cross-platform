@@ -741,7 +741,7 @@ cmd_add() {
     local name="$1" host="$2" user="${3:-}"
     [ -z "$name" ] || [ -z "$host" ] && {
         echo "用法: $0 add <name> <host> [user]"
-        echo "示例: $0 add dev-vm 172.29.102.24 Jshen"
+        echo "示例: $0 add dev-vm <REMOTE_HOST> <USER>"
         return 1
     }
 
@@ -887,7 +887,7 @@ case "${1:-status}" in
         echo ""
         echo "配置文件: $SERVERS_FILE"
         echo "  格式: name|host|user|enabled"
-        echo "  示例: dev-vm|172.29.102.24|Jshen|yes"
+        echo "  示例: dev-vm|<REMOTE_HOST>|<USER>|yes"
         echo ""
         echo "环境变量:"
         echo "  CODEX_CLOUD_PORT       端口 (默认 8421)"

@@ -1,0 +1,15 @@
+# Codex Local Cloud — 远程服务器配置
+# 格式: name|host|user|enabled
+#   name:    服务器名称（用于命令参数和显示）
+#   host:    SSH 主机地址
+#   user:    SSH 用户名（留空则使用 $USER）
+#   enabled: yes/no（no 时不会被自动连接）
+#
+# 添加服务器: ./codex-local-cloud.sh add <name> <host> [user]
+# 移除服务器: ./codex-local-cloud.sh remove <name>
+# 列出服务器: ./codex-local-cloud.sh list
+
+# 示例:
+# dev-vm|<REMOTE_HOST>|<USER>|yes
+# gpu-box|<REMOTE_HOST>|admin|yes
+# laptop|<REMOTE_HOST>||no

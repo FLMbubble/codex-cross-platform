@@ -49,8 +49,8 @@ ssh-copy-id <user>@<host>
 cd ~/Documents/project/codex-cross-platform
 
 # 添加服务器（名称 | 地址 | 用户名）
-./codex-local-cloud.sh add dev-vm 172.29.102.24 Jshen
-./codex-local-cloud.sh add luban 10.152.52.7 luban
+./codex-local-cloud.sh add dev-vm <REMOTE_HOST> <USER>
+./codex-local-cloud.sh add <USER> <REMOTE_HOST> <USER>
 
 # 列出已配置的服务器
 ./codex-local-cloud.sh list
@@ -66,9 +66,9 @@ cd ~/Documents/project/codex-cross-platform
 ```
 # 格式: name|host|user|enabled
 #   enabled: yes/no（no 时不会被自动连接）
-dev-vm|172.29.102.24|Jshen|yes
-luban|10.152.52.7|luban|yes
-laptop|192.168.1.100||no
+dev-vm|<REMOTE_HOST><USER>|yes
+<USER>|<REMOTE_HOST><USER>|yes
+laptop|<REMOTE_HOST>||no
 ```
 
 ---
@@ -84,7 +84,7 @@ cd ~/Documents/project/codex-cross-platform
 ./codex-local-cloud.sh start
 
 # 只连接指定服务器
-./codex-local-cloud.sh start tunnel luban
+./codex-local-cloud.sh start tunnel <USER>
 
 # 查看状态
 ./codex-local-cloud.sh status
@@ -233,7 +233,7 @@ sync-state/
 | `CODEX_CLOUD_PORT` | `8421` | app-server 起始端口 |
 | `CODEX_CLOUD_BIN` | 自动检测 | codex 二进制路径 |
 | `CODEX_CLOUD_SERVERS` | `<脚本目录>/codex-cloud-servers.conf` | 服务器配置文件 |
-| `CODEX_SYNC_REMOTE` | `172.29.102.24` | 文件同步模式的远程地址 |
+| `CODEX_SYNC_REMOTE` | `<REMOTE_HOST>` | 文件同步模式的远程地址 |
 | `CODEX_SYNC_ACTIVE_MINUTES` | `30` | 活跃会话时间窗口（分钟） |
 | `CODEX_SYNC_INTERVAL` | `5` | 守护进程轮询间隔（秒） |
 

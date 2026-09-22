@@ -3,7 +3,7 @@
 # 被 codex-session-sync.sh / codex-auto-sync.sh / codex-sync-daemon.sh source 使用
 
 # 远程主机
-REMOTE_HOST="${CODEX_SYNC_REMOTE:-172.29.102.24}"
+REMOTE_HOST="${CODEX_SYNC_REMOTE:-<REMOTE_HOST>}"
 
 # 发现本地所有会话 rollout 文件
 # 输出格式: <session_id> <relative_path>  每行一个，按修改时间倒序
